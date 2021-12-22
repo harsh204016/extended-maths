@@ -9,12 +9,16 @@ def multiply(number1, number2):
     number2: input number can be int or string
 
     """
+    
     if isinstance(number1, int):
         number1 = str(number1)
+        
     if isinstance(number2, int):
         number2 = str(number2)
+        
     len1 = len(number1)
     len2 = len(number2)
+    
     if len1 == 0 or len2 == 0:
         return "0"
 
@@ -51,19 +55,3 @@ def multiply(number1, number2):
         i -= 1
 
     return s
-
-str1 = "54"
-str2 = "23"
-
-if((str1[0] == '-' or str2[0] == '-') and
-   (str1[0] != '-' or str2[0] != '-')):
-    print("-", end= '')
-
-if(str1[0] == '-' and str2[0] != '-'):
-    str1 = str1[1:]
-elif(str1[0] != '-' and str2[0] == '-'):
-    str2 = str2[1:]
-elif(str1[0] == '-' and str2[0] == '-'):
-    str1 = str1[1:]
-    str2 = str2[1:]
-print(multiply(str1, str2))
