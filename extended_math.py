@@ -4,29 +4,36 @@
 # Release: Extended maths
 
 
+from large_multiplication import multiply
 
-def factorial(n):
+def factorial(number):
     """
-    A function to calculate factorial of a number
-    :param n:integer
+    A function to calculate factorial of a number.
+
+    :param number:integer
     """
-    if n is None or not isinstance(n , int):
+    if number is None or not isinstance(number , int):
         raise Exception("Entered number is invalid ")
-    if n==0:
+    if number == 0:
         return 1
     result=1
-    for i in range(2,n+1):
-        result*=i
+    if number < pow(2,20):
+        for iter in range(2,number+1):
+            result = result*iter
+
+    elif number >= pow(2,5):
+        for iter in range(2,number+1):
+            result = multiply(result,iter)
     return result
 
-def isPalindrome(n):
+def isPalindrome(number):
     """
-    A function to check if the string is palindrome or not
-    :param n:string or intger
+    A function to check if the string is palindrome or not.
+    :param number:string or intger
     """
-    if isinstance(n , int):
-        n = str(n)
-    return n == n[::-1]
+    if isinstance(number , int):
+        number = str(number)
+    return number == number[::-1]
 
-def 
+
 
