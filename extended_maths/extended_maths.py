@@ -16,11 +16,13 @@ def factorial(number):
     if number == 0:
         return 1
     result=1
+    #added for the small numbers
     if number < pow(2,20):
         for iter in range(2,number+1):
             result = result*iter
-
-    elif number >= pow(2,5):
+            
+    #added for the large numbers
+    elif number >= pow(2,20):
         for iter in range(2,number+1):
             result = multiply(result,iter)
     return result
