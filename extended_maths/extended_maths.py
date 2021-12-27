@@ -3,16 +3,15 @@
 # License: MIT
 # Release: Extended maths
 
-from large_multiplication import multiply
+from extended_maths.utils.large_multiplication import multiply
 
 def factorial(number):
     """
     A function to calculate factorial of a number.
-
-    :param number:integer
+    param number:integer
     """
     if number is None or not isinstance(number , int):
-        raise Exception("Entered number is invalid ")
+        raise Exception("Entered number must be of type 'int' ")
     if number == 0:
         return 1
     result=1
@@ -29,11 +28,49 @@ def factorial(number):
 
 def isPalindrome(number):
     """
-    A function to check if the string is palindrome or not.
+    A function to check if the string or number is palindrome or not.
     :param number:string or intger
     """
     if isinstance(number , int):
         number = str(number)
     return number == number[::-1]
 
+def isSquare(number):
+    """
+    A function to check if the number is a square of a number.
 
+    param number: intger
+    
+    returns Boolean value True or False
+    """
+
+    if not isinstance(number , int):
+        raise Exception("Entered number must be of type 'int' ")
+
+    expected_number = number**0.5
+    return True if expected_number%1==0 else False 
+
+
+def toKelvin(temp):
+    """
+    A function to convert given celsius temperature to kelvin.
+
+    param number: intger or float
+    
+    returns kelvin temperature
+    """
+
+    kelvin = 273.15 + temp
+    return kelvin
+
+def toFahrenheit(temp):
+    """
+    A function to convert given celsius temperature to fahrenheit.
+
+    param number: intger or float
+    
+    returns fahrenheit temperature
+    """
+
+    fahrenheit = 1.8 * temp + 32
+    return fahrenheit
