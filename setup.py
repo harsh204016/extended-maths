@@ -11,7 +11,6 @@ if __name__ == "__main__":
             version='0.1',
             long_description=long_description,
             long_description_content_type='text/markdown',
-            packages=find_packages(),
             description='Mathmatical functions',
             packages=['extended_maths'],
             author_email='harshgupta204016@gmail.com',
