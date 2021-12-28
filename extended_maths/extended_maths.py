@@ -3,12 +3,12 @@
 # License: MIT
 # Release: Extended maths
 
-from extended_maths.utils.large_multiplication import multiply
 
 def factorial(number):
     """
     A function to calculate factorial of a number.
-    param number:integer
+    
+    param number: integer
     """
     if number is None or not isinstance(number , int):
         raise Exception("Entered number must be of type 'int' ")
@@ -20,16 +20,13 @@ def factorial(number):
         for iter in range(2,number+1):
             result = result*iter
             
-    #added for the large numbers
-    elif number >= pow(2,20):
-        for iter in range(2,number+1):
-            result = multiply(result,iter)
     return result
 
 def isPalindrome(number):
     """
     A function to check if the string or number is palindrome or not.
-    :param number:string or intger
+    
+    param number: string or intger
     """
     if isinstance(number , int):
         number = str(number)
@@ -55,7 +52,7 @@ def toKelvin(temp):
     """
     A function to convert given celsius temperature to kelvin.
 
-    param number: intger or float
+    param temp: intger or float
     
     returns kelvin temperature
     """
