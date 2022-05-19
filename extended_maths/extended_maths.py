@@ -72,6 +72,32 @@ def toFahrenheit(temp):
     fahrenheit = 1.8 * temp + 32
     return fahrenheit
 
+def reduce_dtype(df):
+    """
+    A function to convert given columns of dataframe with higher order datatypes into lower datatypes.
+
+    param number: pandas dataFrame
+    
+    returns pandas dataframe
+    """
+    list_int_type = df.select_dtypes(include=["int64"])
+    for col in list_int_type:
+        if df[col].max()>32767:
+            df[col] = df[col].astype("int64")
+        elif df[col].max()>128:
+            df[col] = df[col].astype("int16")
+        else:
+            df[col] = df[col].astype("int8")
+            
+    list_float_type = df.select_dtypes(include=["float64"])
+    for col in list_float_type:
+        if df[col].max()>np.finfo(np.float16).max:
+            df[col] = df[col].astype("float64")
+        else:
+            df[col] = df[col].astype("float16")       
+    
+    return df
+
 def missing_value(data):
     """
     A function to calculate Missing values in pandas dataframe and the percentage for the same.
@@ -84,4 +110,5 @@ def missing_value(data):
     mis_data = data.isnull().sum().sort_values(ascending=False)
     per_data = ((data.isnull().sum()/data.isnull().count())*100).sort_values(ascending=False)
     ret_data = pd.concat([per_data,mis_data],axis=1,keys=["Percentage Missing","Missing Count"])
+    
     return ret_data[ret_data["Missing Count"]>0] if ret_data[ret_data["Missing Count"]>0].shape[0]>0 else "No missing Value"
