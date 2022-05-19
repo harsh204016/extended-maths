@@ -71,3 +71,17 @@ def toFahrenheit(temp):
 
     fahrenheit = 1.8 * temp + 32
     return fahrenheit
+
+def missing_value(data):
+    """
+    A function to calculate Missing values in pandas dataframe and the percentage for the same.
+
+    param number: pandas dataframe.
+    
+    returns  pandas dataframe with missing value count and percentage.
+    """
+    
+    mis_data = data.isnull().sum().sort_values(ascending=False)
+    per_data = ((data.isnull().sum()/data.isnull().count())*100).sort_values(ascending=False)
+    ret_data = pd.concat([per_data,mis_data],axis=1,keys=["Percentage Missing","Missing Count"])
+    return ret_data[ret_data["Missing Count"]>0] if ret_data[ret_data["Missing Count"]>0].shape[0]>0 else "No missing Value"
