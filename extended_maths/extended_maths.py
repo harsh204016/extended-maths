@@ -71,3 +71,30 @@ def toFahrenheit(temp):
 
     fahrenheit = 1.8 * temp + 32
     return fahrenheit
+
+
+def reduce_dtype(df):
+    """
+    A function to convert given columns of dataframe with higher order datatypes into lower datatypes.
+
+    param number: pandas dataFrame
+    
+    returns pandas dataframe
+    """
+    list_int_type = df.select_dtypes(include=["int64"])
+    for col in list_int_type:
+        if df[col].max()>32767:
+            df[col] = df[col].astype("int64")
+        elif df[col].max()>128:
+            df[col] = df[col].astype("int16")
+        else:
+            df[col] = df[col].astype("int8")
+            
+    list_float_type = df.select_dtypes(include=["float64"])
+    for col in list_float_type:
+        if df[col].max()>np.finfo(np.float16).max:
+            df[col] = df[col].astype("float64")
+        else:
+            df[col] = df[col].astype("float16")       
+    
+    return df
