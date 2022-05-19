@@ -75,11 +75,15 @@ def toFahrenheit(temp):
 def reduce_dtype(df):
     """
     A function to convert given columns of dataframe with higher order datatypes into lower datatypes.
+    It supports both int and float type.
 
     param number: pandas dataFrame
     
     returns pandas dataframe
     """
+    if df is None or not isinstance(df,pd.DataFrame) :
+        return "Entered input must be of pandas dataframe type"
+    
     list_int_type = df.select_dtypes(include=["int64"])
     for col in list_int_type:
         if df[col].max()>32767:
@@ -106,9 +110,27 @@ def missing_value(data):
     
     returns  pandas dataframe with missing value count and percentage.
     """
+    if df is None or not isinstance(df,pd.DataFrame) :
+        return "Entered input must be of pandas dataframe type"
     
     mis_data = data.isnull().sum().sort_values(ascending=False)
     per_data = ((data.isnull().sum()/data.isnull().count())*100).sort_values(ascending=False)
-    ret_data = pd.concat([per_data,mis_data],axis=1,keys=["Percentage Missing","Missing Count"])
+    ret_data = pd.concat([mis_data,per_data],axis=1,keys=["Missing Count","Percentage Missing"])
     
     return ret_data[ret_data["Missing Count"]>0] if ret_data[ret_data["Missing Count"]>0].shape[0]>0 else "No missing Value"
+
+def unique_data(data):
+    """
+    A function to calculate Unique values in pandas dataframe and the percentage for the same.
+
+    param number: pandas dataframe.
+    
+    returns  pandas dataframe with unique values count.
+    """
+    if df is None or not isinstance(df,pd.DataFrame) :
+        return "Entered input must be of pandas dataframe type"
+ 
+    nunique = data.nunique().sort_values()
+    per_data = ((data.nunique()/data.count())*100).sort_values(ascending=False)
+    ret_data =  pd.concat([nunique,per_data],keys=["Unique Values","Percentage"],axis=1)
+    return ret_data.sort_values(by="Unique Values")
